@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>StackOverflow-lite</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="fullbar header">
+            <h3>StackOverflow-lite</h3>
+            <input align="right" type="submit" name="" onclick="window.location='registration.html';" value="Register">
+        </div>
+        <div>
+            <!-- This is space to add left column if need be... Probably for menus -->
+        </div>
+
+        <form id="login-form" method="post">
+            <div class="loginbox">
+
+                <h1 id="login">Login Here</h1>
+
+                <p>Username</p>
+                <input type="text" id="Email" placeholder="Enter Email" required>
+                <p>Password</p>
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <input type="submit" name="" onclick="login()" value="Login">
+
+                <a href="registration.html">Don't have an account?</a>
+
+            </div>
+        </form>
+        <div class="fullbar footer">
+            <p>Copyright &copy; Ian Eyansky</p>
+        </div>
+    </div>
+</body>
+
+</html>
