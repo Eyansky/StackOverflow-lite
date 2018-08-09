@@ -190,6 +190,99 @@ body {
     color: #ffc107;
 }
 
+/* navbar column */
+
+.nav {
+    list-style: none;
+    background: #20282D;
+    height: fit-content;
+    background-position: center right;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-radius: 5px;
+}
+
+/* nav bar ul list */
+
+.vertical-list {
+    list-style-type: none;
+}
+
+.vertical-list .button {
+    border-radius: 5px;
+    background: #515B62;
+}
+
+.vertical-list .button:hover {
+    background: #5F6B72;
+}
+
+.vertical-list li {
+    margin: 0 0 5px;
+}
+
+.vertical-list li:last-child {
+    margin: 0
+}
+
+/* Dark Button CSS  */
+
+.button {
+    outline: 0;
+    padding: 5px 12px;
+    width: 80%;
+    display: block;
+    color: #9fa8b0;
+    font-weight: bold;
+    text-shadow: 1px 1px #1f272b;
+    border: 1px solid #1c252b;
+    border-radius: 3px;
+}
+
+.button:hover {
+    color: #fff;
+}
+
+/* questions */
+
+.question {
+    width: 100%;
+    display: block;
+    color: #0088ff;
+    text-decoration: none;
+}
+
+.question:hover {
+    color: rgb(245, 241, 8);
+}
+
+#question {
+    border-bottom: 1px solid black;
+}
+
+.active {
+    background-position: 0 top;
+    position: relative;
+    top: 1px;
+    color: #28b1de;
+    padding: 6px 12px 4px;
+}
+
+/* main content section */
+
+.content {
+    grid-column: span 2 / auto;
+    background-size: cover;
+    height: fit-content;
+    background-position: center right;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
 /* footer bar */
 
 .footer {
