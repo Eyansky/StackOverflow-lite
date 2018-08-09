@@ -254,6 +254,7 @@ body {
     display: block;
     color: #0088ff;
     text-decoration: none;
+    text-align: left;
 }
 
 .question:hover {
@@ -272,6 +273,24 @@ body {
     padding: 6px 12px 4px;
 }
 
+/* answers */
+
+.answers {
+    width: 100%;
+    display: block;
+    color: #0088ff;
+    text-decoration: none;
+    text-align: left;
+}
+
+.answer:hover {
+    color: rgb(245, 241, 8);
+}
+
+#answer {
+    border-bottom: 1px solid black;
+}
+
 /* main content section */
 
 .content {
@@ -281,6 +300,38 @@ body {
     background-position: center right;
     margin-bottom: 30px;
     text-align: center;
+}
+
+/* answers page text box */
+
+#textarea {
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+/* table */
+
+.submit {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 1em 1.2em;
+    border: 0.16em solid rgba(255, 255, 255, 0);
+    box-sizing: border-box;
+    color: #28b1de;
+    text-align: center;
+}
+
+.submit:hover {
+    border-color: rgb(20, 245, 13);
+}
+
+/* moving the answers to the left */
+
+#solution {
+    text-align: left;
 }
 
 /* footer bar */
