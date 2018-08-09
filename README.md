@@ -1,5 +1,7 @@
 # StackOverflow-lite
 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Eyansky/StackOverflow-lite) [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/Eyansky/StackOverflow-lite) [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/Eyansky/StackOverflow-lite)
+
 StackOverflow-lite is a platform where people can ask questions and provide answers.
 
 # Features
