@@ -1,0 +1,115 @@
+body {
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.6em;
+    margin: 0;
+}
+
+/* Applies to all pages to contain them */
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    width: 95%;
+    margin: auto;
+}
+
+/* Grid for a full bar for the top column */
+
+.fullbar {
+    grid-column: span 3 / auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.header {
+    border-bottom: 1px solid black;
+    display: inline;
+    padding: 10px;
+}
+
+/* registration  */
+
+.registerbox {
+    grid-column: span 2 / auto;
+    width: 50%;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+    padding: 30px;
+    align-content: center;
+}
+
+#register {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.registerbox p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.registerbox input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.registerbox select {
+    width: 100%;
+    height: 30px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.registerbox input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.registerbox input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.registerbox input[type="submit"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
+.registerbox a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+}
+
+.registerbox a:hover {
+    color: #ffc107;
+}
+
+/* footer bar */
+
+.footer {
+    border-top: 1px solid black;
+    display: inline;
+    padding: 10px;
+    text-align: center;
+}
