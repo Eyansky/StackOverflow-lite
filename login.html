@@ -20,7 +20,7 @@
             <!-- This is space to add left column if need be... Probably for menus -->
         </div>
 
-        <form id="login-form" method="post">
+        <form id="login-form" onsubmit="event.preventDefault(); return addAnswer()">
             <div class="loginbox">
 
                 <h1 id="login">Login Here</h1>
