@@ -13,17 +13,22 @@
     <div class="container">
         <div class="fullbar header">
             <h3>StackOverflow-lite</h3>
-            <input align="right" type="submit" name="" onclick="window.location='registration.html';" value="Register">
-            <input align="right" type="submit" name="" onclick="window.location='login.html';" value="Login">
+            <input align="right" type="submit" name="" onclick="window.location='index.html';" value="Logout">
         </div>
         <div class="nav">
             <ul class="vertical-list">
                 <li>
-                    <a href='index.html' class='button'>Recent Questions</a>
+                    <a href='recentquestions.html' class='button'>Recent Questions</a>
                 </li>
 
                 <li>
-                    <a href='askquestion.html' class='button'>Post a Question</a>
+                    <a href='askuserquestions.html' class='button'>Post a Question</a>
+                </li>
+                <li>
+                    <a href='userquestions.html' class='button'>My Questions</a>
+                </li>
+                <li>
+                    <a href='userprofile.html' class='button'>User Profile</a>
                 </li>
 
             </ul>
@@ -51,8 +56,12 @@
                         <td>
                             <input class="downvote" type="submit" name="" value="Downvote">
                         </td>
+                        <td>
+                            <input class="accept" type="submit" name="" value="Accept">
+                        </td>
                     </tr>
                 </table>
+
             </div>
             <div id="answer">
                 <h2>Answer 2</h2>
@@ -72,6 +81,9 @@
                         </td>
                         <td>
                             <input class="downvote" type="submit" name="" value="Downvote">
+                        </td>
+                        <td>
+                            <input class="accept" type="submit" name="" value="Accept">
                         </td>
                     </tr>
                 </table>
