@@ -18,3 +18,13 @@ answers = []
 def view_questions():
     return questions
 
+def addQuestion(title, question):
+    id = random.randint(0, 7777777)
+    data = {
+        "id": id,
+        "title": title,
+        "question": question}
+    questions.append(data)
+    return True
+
+
