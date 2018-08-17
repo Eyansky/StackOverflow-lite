@@ -40,7 +40,7 @@ class addAnswer(MethodView):
             jibu = result['answer']
 
             answers(id, jibu)
-            return jsonify({"message": "answers has been added!!"})
+            return jsonify({"message": "answers has been added!!"}), 201
 
 
 # define API resources

@@ -51,7 +51,7 @@ class Questions(MethodView):
             question = result['question']
 
             addQuestion(title, question)
-            return jsonify({"message": "Question has been added!!"})
+            return jsonify({"message": "Question has been added!!"}), 201
 
 
 class SingleQuestion(MethodView):
