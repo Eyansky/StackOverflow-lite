@@ -1,8 +1,28 @@
 # StackOverflow-lite
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Eyansky/StackOverflow-lite) [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/Eyansky/StackOverflow-lite) [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/Eyansky/StackOverflow-lite)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Eyansky/StackOverflow-lite) [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/Eyansky/StackOverflow-lite) [![Build Status](https://travis-ci.org/Eyansky/StackOverflow-lite.svg?branch=ch-tests-159846739)](https://travis-ci.org/Eyansky/StackOverflow-lite) [![Coverage Status](https://coveralls.io/repos/github/Eyansky/StackOverflow-lite/badge.svg?branch=ch-tests-159846739)](https://coveralls.io/github/Eyansky/StackOverflow-lite?branch=ch-tests-159846739)
 
 StackOverflow-lite is a platform where people can ask questions and provide answers.
+
+# Live Preview of UI
+
+[https://eyansky.github.io/StackOverflow-lite/](https://eyansky.github.io/StackOverflow-lite/)
+
+# EndPoints Created
+
+- GET Endpoints
+
+```
+- /api/v1/users/questions
+- /api/v1/users/questions/<int:id>
+```
+
+- POST Endpoints
+
+```
+- /api/v1/users/questions/<int:id>
+- /api/v1/users/questions/<int:id>/answers
+```
 
 # Features
 
