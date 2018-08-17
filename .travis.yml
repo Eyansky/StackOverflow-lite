@@ -9,7 +9,7 @@ install:
   - pip install nose
 
 script:
-  - osetests --exe -v
+  - nosetests --exe -v
   - nosetests --exe --with-coverage --cover-package=api/endpoints
   - coveralls
 
