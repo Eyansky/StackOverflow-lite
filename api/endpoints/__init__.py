@@ -1,4 +1,4 @@
-#! /api/endpoints/resources/__init__.py
+#! /api/endpoints/__init__.py
 # -*- coding: utf-8 -*-
 """This is the core module
 

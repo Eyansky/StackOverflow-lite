@@ -5,7 +5,7 @@ Runs the app in specified exported mode
 import os # allow workings of underlieing os
 
 # import the APP used to instanciate flask
-from api import APP
+from api.endpoints import APP
 
 # run the app
 
