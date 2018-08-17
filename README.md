@@ -13,15 +13,15 @@ StackOverflow-lite is a platform where people can ask questions and provide answ
 - GET Endpoints
 
 ```
-- [/api/v1/users/questions](https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions)
-- [/api/v1/users/questions/<int:id>](https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions/0)
+- https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions
+- https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions/0
 ```
 
 - POST Endpoints
 
 ```
-- [/api/v1/users/questions/<int:id>](https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions/1)
-- [/api/v1/users/questions/<int:id>/answers](https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions/1/answers)
+- https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions/1
+- https://stackoverflow-lite-eyansky.herokuapp.com/api/v1/users/questions/1/answers
 ```
 
 # Features
