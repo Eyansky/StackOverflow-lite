@@ -1,0 +1,104 @@
+FORMAT: 1A
+HOST: https://stackoverflow-lite-eyansky.herokuapp.com/
+
+# StackOverflow-lite
+
+StackOverflow-lite is a platform where people can ask questions and provide answers. 
+
+## Questions Collection [/api/v1/users/questions]
+
+### View All Questions [GET]
+You can view all the questions posted on the forum through this action. 
+It does not take any objects or data since it just pulls out all the questions posted.
+
++ Response 200 (application/json)
+
+       {
+            "questions": [
+                {
+                    "id": 0,
+                    "question": "This is a question. Isnt it?",
+                    "title": "Topic 1"
+                },
+                {
+                    "id": 1,
+                    "question": "This is a question. Isnt it?",
+                    "title": "Topic 1"
+                }
+            ]
+        }
+
+
+### Create a New Question [POST]
+
+You may create your own question using this action. It takes a JSON
+object containing a question and a collection of answers in the
+form of choices.
+
++ Request (application/json)
+
+        {
+            "title": "Favourite programming language?",
+            "question": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/users/questions
+
+    + Body
+
+            {
+    "message": "Question has been added!!"
+}
+
+## Single Question Collection [/api/v1/users/questions/1]
+
+### View Single Question [GET]
+You can view a single question posted on this page. 
+You however need to know their id number thus you must add it to the end of the endpoint.
+The first one is 1 you may edit it to your advantage.
+
++ Response 200 (application/json)
+
+       {
+            "question": [
+                {
+                    "id": 1,
+                    "question": "This is a question. Isnt it?",
+                    "title": "Topic 1"
+                }
+            ]
+        }
+
+## Single Question Collection [/api/v1/users/questions/1/answers]
+
+### Add Answer to Question [GET]
+You can add an answer to a question.
+It is saved with the same id number with the question to make easy to filter 
+answers and questions.
+
++ Request (application/json)
+
+        {
+            "answer": "This is the answer to the question i just picked."
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/users/questions/1/answers
+
+    + Body
+
+           {
+                "message": "answers has been added!!"
+            }
