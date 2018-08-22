@@ -7,7 +7,7 @@ This module contains various routes for the questions endpoint
 """
 
 from flask import Blueprint, request, make_response, jsonify
-from flask.views import MethodView
+from flask.views import MethodView 
 from api.endpoints.resources.models import (
     view_questions, singleQuestion, addQuestion)
 
@@ -58,8 +58,14 @@ class SingleQuestion(MethodView):
     """ Get single question """
 
     def get(self, id):
-        question = singleQuestion(id)
-        return jsonify({"question": question})
+        try:
+            if int(id):
+                question = singleQuestion(str(id))
+                return jsonify({"question": question})
+        
+        except ValueError:
+            return jsonify({"error": "Only integers are required"})
+        
 
 
 # define API resources
@@ -75,7 +81,7 @@ QUESTIONS_BLUEPRINT.add_url_rule(
 
 # add rules for Questions endpoints
 QUESTIONS_BLUEPRINT.add_url_rule(
-    '/questions/<int:id>',
+    '/questions/<id>',
     view_func=SINGLEQUESTION_VIEW,
     methods=['GET']
 )
