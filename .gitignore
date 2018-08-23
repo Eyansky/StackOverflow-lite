@@ -109,3 +109,5 @@ venv.bak/
  .DS_Store
 api/.DS_Store
 api/endpoints/.DS_Store
+api/endpoints/auth/.DS_Store
+.DS_Store
