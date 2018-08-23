@@ -9,7 +9,7 @@ service:
 before_install:
   - psql -c "CREATE DATABASE stackoverflow_test;" -U postgres
   - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
-  - export APP_SETTINGS="api.endpoint.config.TestingConfig"
+  - export APP_SETTINGS="api.endpoints.config.TestingConfig"
   - export SECRET_KEY="hushhushsecret"
   - export PGDATABASE="stackoverflow"
   - export PGUSER="postgres"
@@ -24,7 +24,7 @@ before_script:
 
 script:
   - nosetests --exe -v
-  - nosetests --exe --with-coverage --cover-package=api/endpoint
+  - nosetests --exe --with-coverage --cover-package=api/endpoints
   - coveralls
 
 after_success:
