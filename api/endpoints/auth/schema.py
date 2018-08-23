@@ -10,6 +10,7 @@ from wtforms.validators import Length, Regexp
 
 PASS_REG = r"^(?=.*\d)(?=.*[a-zA-Z]).{8,20}$"
 
+
 class UserSchema(Schema):
     """User schema"""
     is_admin = fields.Str(dump_only=True)
@@ -54,10 +55,32 @@ class UserSchema(Schema):
         validate=from_wtforms(
             [
                 Length(min=8, max=50,
-                       message="Password should be between 8 and 20"),
+                       message="Password should be between 8 and 50"),
                 Regexp(
                     PASS_REG,
                     message="Weak password"
+                ),
+            ]
+        )
+    )
+
+
+class LoginSchema(Schema):
+    """Login schema"""
+    email = fields.Email(
+        required=True,
+        validate=from_wtforms(
+            [Length(min=8, max=50,
+                    message="Email should be between 8 and 50 characters")]
+        )
+    )
+    password = fields.Str(
+        required=True,
+        validate=from_wtforms(
+            [
+                Length(
+                    min=8, max=50,
+                    message="Password should be between 8 and 50 characters"
                 ),
             ]
         )

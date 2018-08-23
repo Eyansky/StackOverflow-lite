@@ -5,22 +5,21 @@ This module contains classes for our various configuration settings.
 """
 
 import os
+
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class BaseConfig:  # pylint: disable=too-few-public-methods
     """Base configuration."""
-    SECRET_KEY = os.getenv('SECRET_KEY', 'TheSecretKey')
+    SECRET_KEY = os.getenv('SECRET_KEY', 'hushhushsecret')
     JWT_SECRET_KEY = os.getenv('SECRET_KEY', 'TheSecretKey')
-    DEBUG = False
+    DEBUG = True
     BCRYPT_LOG_ROUNDS = 13
     DATABASE_HOST = "localhost"
-    
-
 
 class DevelopmentConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     """Development configuration."""
-    DEBUG = True
+    TESTING = False
     BCRYPT_LOG_ROUNDS = 4
     DATABASE_NAME = os.getenv("PGDATABASE")
     DATABASE_USER = os.getenv("PGUSER")
@@ -41,3 +40,4 @@ class ProductionConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     SECRET_KEY = 'TheSecretKey'
     DEBUG = False
     DATABASE_NAME = os.getenv("PGDATABASE")
+

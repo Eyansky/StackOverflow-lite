@@ -14,7 +14,7 @@ CREATE TABLE tbl_questions
 	questions_title VARCHAR(255) NOT NULL,
 	questions_description VARCHAR(255) NOT NULL,
 	created_by INTEGER,
-	FOREIGN KEY(created_by) REFERENCES tbl_users (user_id)
+	FOREIGN KEY(created_by) REFERENCES tbl_users (email)
 );
 CREATE TABLE tbl_answers
 (

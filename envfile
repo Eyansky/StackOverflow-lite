@@ -1,0 +1,5 @@
+export APP_SETTINGS="api.endpoints.resources.config.TestingConfig"
+export SECRET_KEY="your secret key"
+export PGDATABASE="stackoverflow"
+export PGUSER="ianmwangi"
+export PGPASSWORD=""

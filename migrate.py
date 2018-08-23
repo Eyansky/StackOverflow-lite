@@ -1,6 +1,5 @@
 # migrate.py
 """This is the migrations modules
-
 This module handles populating the database
 """
 import sys
@@ -10,6 +9,7 @@ from db_conn import DbConn
 from api.endpoints.auth.models import signup_user
 
 CONN = DbConn()
+
 
 def main():
     """Main method"""
@@ -26,7 +26,7 @@ def main():
 
     # Create default Admin
     signup_user("Ian", "Mwangi", "ianeyansky@gmail.com",
-                "123456789")
+                "qwerty")
 
 
 if __name__ == "__main__":

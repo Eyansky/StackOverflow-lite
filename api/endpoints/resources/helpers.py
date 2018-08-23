@@ -20,7 +20,6 @@ def run_query(query, inputs):
         return False
 
 
-
 def get_query(query, inputs):
     """Get results"""
     try:

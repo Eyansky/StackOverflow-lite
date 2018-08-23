@@ -3,8 +3,9 @@
 """This is the auth modules
 This module contains functions that are used in the auth endpoint
 """
-from api.endpoints import APP
+from api.endpoints import APP, BCRYPT
 from api.endpoints.resources.helpers import run_query, get_query
+
 
 def signup_user(first_name, last_name, email, password):
     """Create a new user account"""
@@ -13,20 +14,15 @@ def signup_user(first_name, last_name, email, password):
         password, APP.config.get('BCRYPT_LOG_ROUNDS')
     ).decode()
 
-    # capitalize first letter
-    first_name = first_name.title()
-    last_name = last_name.title()
-
-    # query and the user inputs 
-    query = (u"INSERT INTO tbl_users (first_name, last_name, email, password "
+    # query and the user inputs
+    query = (u"INSERT INTO tbl_users (first_name, last_name, email, password, "
              ") VALUES (%s, %s, %s, %s);")
     inputs = first_name, last_name, email, hash_password
     # run query
     return run_query(query, inputs)
 
-
 def email_exists(input_email):
-    """Chek if the user email exists"""
+    """Check if the user email exists"""
     # SQL query
     query = u"SELECT * FROM tbl_users WHERE email = %s;"
     inputs = input_email
