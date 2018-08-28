@@ -7,13 +7,9 @@ service:
   - postgresql
 
 env:
-  - APP_SETTINGS="api.server.config.TestingConfig"
-  - SECRET_KEY="this_is_the_secret_key"
-  - PGDATABASE="stackoverflow"
-  - PGUSER="postresql"
-  - PGPASSWORD="password"
+  - APP_SETTINGS="api.server.config.TestingConfig" SECRET_KEY="this_is_the_secret_key" PGDATABASE="stackoverflow" PGUSER="postresql" PGPASSWORD="password"
 
-before_install:
+before_script:
   - psql -c "CREATE DATABASE stackoverflow_test;" -U postgres
   - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
 
