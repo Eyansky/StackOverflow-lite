@@ -7,7 +7,7 @@ service:
   - postgresql
 
 env:
-  - APP_SETTINGS="api.server.config.TestingConfig" SECRET_KEY="this_is_the_secret_key" PGDATABASE="stackoverflow" PGUSER="postresql" PGPASSWORD="password"
+  - APP_SETTINGS="api.server.config.TestingConfig" SECRET_KEY="this_is_the_secret_key" PGDATABASE="stackoverflow_test" PGUSER="postresql" PGPASSWORD="password"
 
 before_script:
   - psql -c "CREATE DATABASE stackoverflow_test;" -U postgres
