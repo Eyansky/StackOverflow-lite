@@ -6,14 +6,16 @@ python:
 service:
   - postgresql
 
+env:
+  - APP_SETTINGS="api.server.config.TestingConfig"
+  - SECRET_KEY="this_is_the_secret_key"
+  - PGDATABASE="stack-overflow"
+  - PGUSER="postresql"
+  - PGPASSWORD="password"
+
 before_install:
   - psql -c "CREATE DATABASE stack-overflow_test;" -U postgres
   - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
-  - export APP_SETTINGS="api.server.config.TestingConfig"
-  - export SECRET_KEY="this_is_the_secret_key"
-  - export PGDATABASE="stack-overflow"
-  - export PGUSER="postgres"
-  - export PGPASSWORD="password"
 
 install:
   - pip install -r requirements.txt
