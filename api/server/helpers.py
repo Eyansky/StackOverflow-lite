@@ -5,7 +5,7 @@
 This module contains functions that abstract the common DB usage
 """
 import psycopg2
-from db_conn import DbConn
+# from db_conn import DbConn
 
 
 def run_query(query, inputs):

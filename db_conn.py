@@ -1,13 +1,11 @@
 # db_con.py
 """This module connects to the database"""
-
 from psycopg2 import connect
 from psycopg2.extras import RealDictCursor
-
+from connect_creds import CONNECT_CREDS
 
 class DbConn(object):
     """Database Creation Class"""
-
     def __init__(self):
         """Constructor method"""
         self.conn = connect(**CONNECT_CREDS)
@@ -21,16 +19,3 @@ class DbConn(object):
         """Close Connection"""
         self.cur.close()
         self.conn.close()
-
-
-# Placed at the bottom to avoid cirtular importation
-from api.server import APP
-print("we're also here ====>", APP.config.get('DATABASE_HOST'))
-
-CONNECT_CREDS = {
-    "host": APP.config.get('DATABASE_HOST'),
-    "database": APP.config.get('DATABASE_NAME'),
-    "user": APP.config.get('DATABASE_USER'),
-    "password": APP.config.get('DATABASE_PASS')
-}
-print("here*******====>>>", CONNECT_CREDS)
