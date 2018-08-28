@@ -7,11 +7,10 @@ service:
   - postgresql
 
 env:
-  - APP_SETTINGS="api.server.config.TestingConfig" SECRET_KEY="this_is_the_secret_key" PGDATABASE="stackoverflow_test" PGUSER="postgres" PGPASSWORD="password"
+  - APP_SETTINGS="api.server.config.TestingConfig" SECRET_KEY="this_is_the_secret_key" PGDATABASE="stackoverflow_test" PGUSER="postgres" PGPASSWORD=""
 
 before_script:
   - "psql -c 'create database stackoverflow_test;' -U postgres"
-  - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
 
 install:
   - pip install -r requirements.txt
