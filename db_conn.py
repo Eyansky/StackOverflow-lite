@@ -25,6 +25,7 @@ class DbConn(object):
 
 # Placed at the bottom to avoid cirtular importation
 from api.server import APP
+print("we're also here ====>", APP.config.get('DATABASE_HOST'))
 
 CONNECT_CREDS = {
     "host": APP.config.get('DATABASE_HOST'),
@@ -32,3 +33,4 @@ CONNECT_CREDS = {
     "user": APP.config.get('DATABASE_USER'),
     "password": APP.config.get('DATABASE_PASS')
 }
+print("here*******====>>>", CONNECT_CREDS)
