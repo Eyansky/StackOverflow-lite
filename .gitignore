@@ -103,5 +103,8 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-#vscode
- .DS_Store
+# vscode
+.vscode
+
+.DS_Store
+.env_test

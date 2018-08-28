@@ -1,4 +1,4 @@
-#! /api/endpoints/resources/helpers.py
+#! /api/server/helpers.py
 # -*- coding: utf-8 -*-
 """This is the helpers module
 
@@ -16,21 +16,9 @@ def run_query(query, inputs):
         db_instance.conn.commit()
         db_instance.close()
         return True
-
-    except psycopg2.Error:
+    except psycopg2.Error as e:
         return False
 
-def run_just_query(query):
-    """Run queries"""
-    try:
-        db_instance = DbConn()
-        db_instance.cur.execute(query)
-        db_instance.conn.commit()
-        db_instance.close()
-        return True
-
-    except psycopg2.Error:
-        return False
 
 def get_query(query, inputs):
     """Get results"""
@@ -40,8 +28,9 @@ def get_query(query, inputs):
         result = db_instance.cur.fetchall()
         db_instance.close()
         return result
-    except psycopg2.Error:
+    except psycopg2.Error as e:
         return False
+
 
 def get_just_query(query):
     """Get results"""
@@ -51,5 +40,5 @@ def get_just_query(query):
         result = db_instance.cur.fetchall()
         db_instance.close()
         return result
-    except psycopg2.Error:
+    except psycopg2.Error as e:
         return False

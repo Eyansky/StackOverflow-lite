@@ -1,0 +1,33 @@
+User can create a new question.
+A logged in user can create a new question.
+    ---
+    tags:
+      - Create new question Endpoint
+    summary: Create question
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - in: header
+        name: Authorization
+        description: Authorization Token
+        type: string
+        required: true
+      - in: body
+        name: body
+        description:
+          Create a new question
+        required: true
+        schema:
+          properties:
+            title:
+              type: string
+              description: Title of the question.
+              example: This is a serious question.Isn't it?
+              required: true
+            details:
+              type: string
+              description: Description of the question.
+              example: That question is too serious. This is the equivalent answer to the question. Hope it helps.
+              required: true

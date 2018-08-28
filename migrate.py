@@ -1,12 +1,13 @@
 # migrate.py
-"""This is the migrations modules
+"""This is the migrations moduls
+
 This module handles populating the database
 """
 import sys
 import psycopg2
 
 from db_conn import DbConn
-from api.endpoints.auth.models import signup_user
+from api.server.auth.models import signup_user
 
 CONN = DbConn()
 
@@ -23,10 +24,6 @@ def main():
         raise SystemExit(
             "Failed to load schema.\n{0}".format(sys.exc_info())
         )
-
-    # Create default Admin
-    signup_user("Ian", "Mwangi", "ianeyansky@gmail.com",
-                "qwerty")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,10 @@
+User can view all questions
+Any user can view all questions.
+    ---
+    tags:
+      - Create new question Endpoint
+    summary: View info
+    consumes:
+      - application/json
+    produces:
+      - application/json

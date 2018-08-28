@@ -1,4 +1,4 @@
-#! /api/endpoints/auth/schema.py
+#! /api/server/auth/schema.py
 # -*- coding: utf-8 -*-
 """Contains the schema for the auth endpoint
 Marshmallow validation with wtforms
@@ -13,7 +13,6 @@ PASS_REG = r"^(?=.*\d)(?=.*[a-zA-Z]).{8,20}$"
 
 class UserSchema(Schema):
     """User schema"""
-    is_admin = fields.Str(dump_only=True)
     first_name = fields.Str(
         required=True,
         validate=from_wtforms(
@@ -54,8 +53,8 @@ class UserSchema(Schema):
         required=True,
         validate=from_wtforms(
             [
-                Length(min=8, max=50,
-                       message="Password should be between 8 and 50"),
+                Length(min=8, max=20,
+                       message="Password should be between 8 and 20"),
                 Regexp(
                     PASS_REG,
                     message="Weak password"
@@ -79,8 +78,8 @@ class LoginSchema(Schema):
         validate=from_wtforms(
             [
                 Length(
-                    min=8, max=50,
-                    message="Password should be between 8 and 50 characters"
+                    min=8, max=20,
+                    message="Password should be between 8 and 20 characters"
                 ),
             ]
         )

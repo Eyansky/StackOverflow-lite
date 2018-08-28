@@ -1,0 +1,10 @@
+User can delete single question 
+Any user can delete a single question via its Id.
+    ---
+    tags:
+      - Delete question Endpoint
+    summary: View info
+    consumes:
+      - application/json
+    produces:
+      - application/json
