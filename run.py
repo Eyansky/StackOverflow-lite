@@ -8,7 +8,6 @@ Runs the app in specified exported mode
 from api.server import APP
 
 # run the app
-
 if __name__ == '__main__':
     # PORT = int(os.environ.get('PORT', 5000))
     APP.run()

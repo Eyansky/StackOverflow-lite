@@ -30,11 +30,12 @@ def email_exists(input_email):
     query = u"SELECT * FROM tbl_users WHERE email = %s;"
     inputs = input_email
     all_users = get_query(query, inputs)
-
-    for find_email in all_users:
-        if find_email['email'] == inputs:
-            return True
-    return False
+    #checks if list is empty
+    if all_users:
+        for find_email in all_users:
+            if find_email['email'] == inputs:
+                return True
+        return False
 
 
 def check_email_for_login(input_email):

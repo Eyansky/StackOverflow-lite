@@ -11,7 +11,7 @@ initialized flask object to various modules and extensions.
 import os
 
 # python microframework
-from flask import Flask
+from flask import Flask, redirect
 
 # provides bcrypt hashing utilities for our application
 from flask_bcrypt import Bcrypt
@@ -59,6 +59,9 @@ SWAG = Swagger(
     },
 )
 
+@APP.route('/')
+def home():
+    return redirect('/apidocs')
 
 # import auth blueprints
 from api.server.auth.views import AUTH_BLUEPRINT  # noqa  # pylint: disable=C0413
