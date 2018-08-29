@@ -48,7 +48,7 @@ SWAG = Swagger(
         "uiversion": 2,
         "info": {
             "title": "Stack Overflow - LITE",
-            "version": "1.0",
+            "version": "2.0",
         },
         "consumes": [
             "application/x-www-form-urlencoded",
@@ -63,7 +63,9 @@ SWAG = Swagger(
 # import auth blueprints
 from api.server.auth.views import AUTH_BLUEPRINT  # noqa  # pylint: disable=C0413
 from api.server.questions.views import QUESTIONS_BLUEPRINT  # noqa  # pylint: disable=C0413
+from api.server.answers.views import ANSWERS_BLUEPRINT  # noqa  # pylint: disable=C0413
 
 # Register Blueprints
 APP.register_blueprint(AUTH_BLUEPRINT)
 APP.register_blueprint(QUESTIONS_BLUEPRINT)
+APP.register_blueprint(ANSWERS_BLUEPRINT)

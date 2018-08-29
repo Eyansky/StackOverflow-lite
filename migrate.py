@@ -7,7 +7,7 @@ import sys
 import psycopg2
 
 from db_conn import DbConn
-# from api.server.auth.models import signup_user
+from api.server.auth.models import signup_user
 
 CONN = DbConn()
 

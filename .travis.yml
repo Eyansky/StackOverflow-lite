@@ -6,18 +6,23 @@ python:
 service:
   - postgresql
 
-env:
-  - APP_SETTINGS="api.server.config.TestingConfig" SECRET_KEY="this_is_the_secret_key" PGDATABASE="stackoverflow_test" PGUSER="postgres" PGPASSWORD=""
-
-before_script:
-  - "psql -c 'create database stackoverflow_test;' -U postgres"
+before_install:
+  - psql -c "CREATE DATABASE stackoverflow_test;" -U postgres
+  - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
+  - export APP_SETTINGS="api.server.config.TestingConfig"
+  - export SECRET_KEY="this_is_the_secret_key"
+  - export PGDATABASE="stackoverflow"
+  - export PGUSER="postgres"
+  - export PGPASSWORD="password"
 
 install:
   - pip install -r requirements.txt
   - pip install coveralls
 
-script:
+before_script:
   - python migrate.py
+
+script:
   - nosetests --exe -v
   - nosetests --exe --with-coverage --cover-package=api/server
   - coveralls

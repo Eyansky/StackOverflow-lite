@@ -63,7 +63,7 @@ class QuestionsAPI(MethodView):
             "msg": "Question successfully posted."
         }
         return make_response(jsonify(response_object)), 201
-
+  
     @swag_from('documentation/get_all_questions.yml', methods=['GET'])
     def get(self):
         """Get all questions"""
@@ -91,12 +91,14 @@ class SingleQuestionsAPI(MethodView):
         except ValueError:
             return jsonify({"error": "Only integers are required"})
             
-    @swag_from('documentation/delete_single_questions.yml', methods=['GET'])
+    @jwt_required        
+    @swag_from('documentation/delete_single_questions.yml', methods=['DELETE'])
     def delete(self,id):
         """Delete a single question"""
 
         try:
             if int(id):
+                delete_single_question(id)
                 response_object = {
                     "status": 'success'
                 }

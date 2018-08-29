@@ -33,7 +33,8 @@ def get_single_question(id):
 
 def delete_single_question(id):
     """Delete a question"""
-    query = ("DELETE FROM tbl_questions WHERE questions_id = %s;")
+    query = ("DELETE FROM tbl_questions WHERE question_id = %s;")
     inputs = id
     user_requests = run_query(query, inputs)
     return user_requests
+

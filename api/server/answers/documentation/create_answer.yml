@@ -1,0 +1,33 @@
+User can create a new answer to an asked question.
+A logged in user can create a new answer.
+    ---
+    tags:
+      - Create new answers Endpoint
+    summary: Create answer
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - in: header
+        name: Authorization
+        description: Authorization Token
+        type: string
+        required: true
+      - in: path
+        type: string
+        required: true
+        name: id
+      - in: body
+        name: body
+        description:
+          Create a new answer
+        required: true
+        schema:
+          properties:
+            answer:
+              type: string
+              description: Answer to the question.
+              example: This is the answer to your question
+              required: true
+           

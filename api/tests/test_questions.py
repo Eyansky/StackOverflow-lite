@@ -1,7 +1,6 @@
-# ! /api/tests/test_test.py
+# ! /api/tests/test_questions.py
 # -*- coding: utf-8 -*-
 """Tests for the auth endpoint
-Contains basic tests for registration, login and logout
 """
 
 import json
@@ -26,7 +25,7 @@ def create_user():
 
 
 def create_question(self, title, details):
-    """New request"""
+    """New Question"""
 
     # Create a UserObject for tokens
     user = {
@@ -128,7 +127,7 @@ class TestQuestionsEndpoint(BaseTestCase):
             truncate_tables()
 
     def test_fail_get_single_question(self):
-        """Test for error url"""
+        """Test for fail to get single single question"""
         with self.client:
             response = self.client.get(
                 URL_PREFIX + 'questions/x',)
@@ -137,23 +136,39 @@ class TestQuestionsEndpoint(BaseTestCase):
             truncate_tables()
   
     def test_delete_question(self):
-        """Test any user can see a single question"""
-        title = "Test question"
-        details = "This is a test question. Isnt it?"
-        create_question(self, title, details)
+        """Test for delete question"""
         with self.client:
+            create_user()
+            # Create a UserObject for tokens
+            user = {
+                "user_id": "988"
+            }
+            access_token = create_access_token(identity=user)
+            headers = {
+                'Authorization': 'Bearer {}'.format(access_token)
+            }
             response = self.client.delete(
-                URL_PREFIX + 'questions/1',)
-            data = json.loads(response.data.decode())
+                "/api/v2/users/questions/1", headers=headers)
             self.assertEqual(response.status_code, 200)
-            self.assertTrue(data["status"] == "success")
-            truncate_tables()  
+            truncate_tables()
     
-    def test_fail_delete_question(self):
-        """Test for error url"""
+    def test_error_delete_question_id(self):
+        """Test for invalid question id in delete question"""
         with self.client:
+            create_user()
+            # Create a UserObject for tokens
+            user = {
+                "user_id": "988"
+            }
+            access_token = create_access_token(identity=user)
+            headers = {
+                'Authorization': 'Bearer {}'.format(access_token)
+            }
             response = self.client.delete(
-                URL_PREFIX + 'questions/x',)
+                "/api/v2/users/questions/x", headers=headers)
             data = json.loads(response.data.decode())
             self.assertTrue(data["error"] == "Only integers are required")
             truncate_tables()
+
+# ***************************************************************************************
+
