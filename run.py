@@ -3,10 +3,11 @@
 """Entry point of the app
 Runs the app in specified exported mode
 """
-
+from migrate import main 
 # import the APP used to instanciate flask
 from api.server import APP
 
+main()
 # run the app
 if __name__ == '__main__':
     # PORT = int(os.environ.get('PORT', 5000))
