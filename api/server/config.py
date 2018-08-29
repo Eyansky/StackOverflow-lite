@@ -30,6 +30,7 @@ class DevelopmentConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     DATABASE_NAME = os.getenv("PGDATABASE")
     DATABASE_USER = os.getenv("PGUSER")
     DATABASE_PASS = os.getenv("PGPASSWORD")
+    DATABASE_HOST = os.getenv("DATABASE_HOST")
 
 
 class TestingConfig(BaseConfig):  # pylint: disable=too-few-public-methods
@@ -46,3 +47,4 @@ class ProductionConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     SECRET_KEY = 'TheSecretKey'
     DEBUG = False
     DATABASE_NAME = os.getenv("PGDATABASE")
+
