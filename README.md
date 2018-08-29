@@ -1,6 +1,6 @@
 # StackOverflow-lite
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Eyansky/StackOverflow-lite) [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/Eyansky/StackOverflow-lite) [![Build Status](https://travis-ci.org/Eyansky/StackOverflow-lite.svg?branch=ch-tests-159846739)](https://travis-ci.org/Eyansky/StackOverflow-lite) [![Coverage Status](https://coveralls.io/repos/github/Eyansky/StackOverflow-lite/badge.svg?branch=ch-tests-159846739)](https://coveralls.io/github/Eyansky/StackOverflow-lite?branch=ch-tests-159846739) [![Maintainability](https://api.codeclimate.com/v1/badges/1aa773e735e851af212f/maintainability)](https://codeclimate.com/github/Eyansky/StackOverflow-lite/maintainability)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Eyansky/StackOverflow-lite) ![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103) [![Maintainability](https://api.codeclimate.com/v1/badges/1aa773e735e851af212f/maintainability)](https://codeclimate.com/github/Eyansky/StackOverflow-lite/maintainability) [![Build Status](https://travis-ci.org/Eyansky/StackOverflow-lite.svg?branch=challenge3)](https://travis-ci.org/Eyansky/StackOverflow-lite) [![Coverage Status](https://coveralls.io/repos/github/Eyansky/StackOverflow-lite/badge.svg?branch=challenge3)](https://coveralls.io/github/Eyansky/StackOverflow-lite?branch=challenge3)
 
 StackOverflow-lite is a platform where people can ask questions and provide answers.
 
@@ -98,7 +98,7 @@ $ nosetests --exe -v
 
 #### StackOverFlowLite hosted on Heroku
 
-- [Open Heroku](https://stackoverflow-lite-eyansky.herokuapp.com)
+- 
 
 ## Contributing
 
