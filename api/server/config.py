@@ -38,9 +38,7 @@ class TestingConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     TESTING = True
     BCRYPT_LOG_ROUNDS = 4
     PRESERVE_CONTEXT_ON_EXCEPTION = False
-    DATABASE_NAME = os.getenv("PGDATABASE")
-    DATABASE_USER = os.getenv("PGUSER")
-    DATABASE_PASS = os.getenv("PGPASSWORD")
+    DATABASE_NAME = os.getenv("PGDATABASE") +"_test"
 
 
 class ProductionConfig(BaseConfig):  # pylint: disable=too-few-public-methods

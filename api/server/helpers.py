@@ -5,13 +5,12 @@
 This module contains functions that abstract the common DB usage
 """
 import psycopg2
-
+from db_conn import DbConn
 
 
 def run_query(query, inputs):
     """Run queries"""
     try:
-        from db_conn import DbConn
         db_instance = DbConn()
         db_instance.cur.execute(query, inputs)
         db_instance.conn.commit()
@@ -24,7 +23,6 @@ def run_query(query, inputs):
 def get_query(query, inputs):
     """Get results"""
     try:
-        from db_conn import DbConn
         db_instance = DbConn()
         db_instance.cur.execute(query, (inputs,))
         result = db_instance.cur.fetchall()
@@ -37,7 +35,6 @@ def get_query(query, inputs):
 def get_just_query(query):
     """Get results"""
     try:
-        from db_conn import DbConn
         db_instance = DbConn()
         db_instance.cur.execute(query)
         result = db_instance.cur.fetchall()

@@ -128,7 +128,7 @@ class TestQuestionsEndpoint(BaseTestCase):
             truncate_tables()
 
     def test_fail_get_single_question(self):
-        """Test for error url"""
+        """Test for fail to get single single question"""
         with self.client:
             response = self.client.get(
                 URL_PREFIX + 'questions/x',)
@@ -136,24 +136,24 @@ class TestQuestionsEndpoint(BaseTestCase):
             self.assertTrue(data["error"] == "Only integers are required")
             truncate_tables()
   
-    def test_delete_question(self):
-        """Test any user can see a single question"""
-        title = "Test question"
-        details = "This is a test question. Isnt it?"
-        create_question(self, title, details)
-        with self.client:
-            response = self.client.delete(
-                URL_PREFIX + 'questions/1',)
-            data = json.loads(response.data.decode())
-            self.assertEqual(response.status_code, 200)
-            self.assertTrue(data["status"] == "success")
-            truncate_tables()  
+    # def test_delete_question(self):
+    #     """Test any user can delete a single question"""
+    #     title = "Test question"
+    #     details = "This is a test question. Isnt it?"
+    #     create_question(self, title, details)
+    #     with self.client:
+    #         response = self.client.delete(
+    #             URL_PREFIX + 'questions/1',)
+    #         data = json.loads(response.data.decode())
+    #         self.assertEqual(response.status_code, 200)
+    #         self.assertTrue(data["status"] == "success")
+    #         truncate_tables()  
     
-    def test_fail_delete_question(self):
-        """Test for error url"""
-        with self.client:
-            response = self.client.delete(
-                URL_PREFIX + 'questions/x',)
-            data = json.loads(response.data.decode())
-            self.assertTrue(data["error"] == "Only integers are required")
-            truncate_tables()
+    # def test_fail_delete_question(self):
+    #     """Test for delete question"""
+    #     with self.client:
+    #         response = self.client.delete(
+    #             URL_PREFIX + 'questions/x',)
+    #         data = json.loads(response.data.decode())
+    #         self.assertTrue(data["error"] == "Only integers are required")
+    #         truncate_tables()
