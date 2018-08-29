@@ -8,3 +8,9 @@ Any user can view a single question via its Id.
       - application/json
     produces:
       - application/json
+    
+    parameters:
+      - in: path
+        type: string
+        required: true
+        name: id

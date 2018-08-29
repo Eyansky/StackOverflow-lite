@@ -92,7 +92,7 @@ class SingleQuestionsAPI(MethodView):
             return jsonify({"error": "Only integers are required"})
             
     @jwt_required        
-    @swag_from('documentation/delete_single_questions.yml', methods=['GET'])
+    @swag_from('documentation/delete_single_questions.yml', methods=['DELETE'])
     def delete(self,id):
         """Delete a single question"""
 

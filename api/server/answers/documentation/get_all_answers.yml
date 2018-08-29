@@ -8,3 +8,8 @@ Any user can view all answers to a question.
       - application/json
     produces:
       - application/json
+    parameters:
+      - in: path
+        type: string
+        required: true
+        name: id 

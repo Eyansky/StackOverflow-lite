@@ -37,6 +37,40 @@ def login_user(self, email, password):
     )
 
 
+def create_user():
+    """Create a user in the DB"""
+    db_instance = DbConn()
+    query = (u"INSERT INTO tbl_users (user_id, first_name, last_name, "
+             "email, password) VALUES (%s,%s,%s,%s,%s);")
+    inputs = '988', 'User', 'User', 'user@user.com', 'aaaAAA111'
+    db_instance.cur.execute(query, inputs)
+    db_instance.conn.commit()
+    db_instance.close()
+
+
+def create_question(self, title, details):
+    """New Question"""
+
+    # Create a UserObject for tokens
+    user = {
+        "user_id": "988",
+        "user_email": "email@mail.com"
+    }
+    access_token = create_access_token(identity=user)
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token)
+    }
+
+    return self.client.post(
+        URL_PREFIX + 'questions',
+        data=json.dumps(dict(
+            title=title,
+            details=details
+        )),
+        content_type='application/json',
+        headers=headers
+    )
+
 class TestAuthEndpoint(BaseTestCase):
     """Class that handles Auth Endpoint test"""
 
@@ -73,7 +107,7 @@ class TestAuthEndpoint(BaseTestCase):
         register_user(self, 'Some', 'Name', 'another@gmail.com', 'aaaAAA111')
         with self.client:
             response = register_user(
-                self, 'Dalin', 'Oluoch', 'another@gmail.com', 'aaaAAA111')
+                self, 'Ian', 'Eyansky', 'another@gmail.com', 'aaaAAA111')
             data = json.loads(response.data.decode())
             self.assertTrue(data['status'] == 'fail')
             self.assertTrue(

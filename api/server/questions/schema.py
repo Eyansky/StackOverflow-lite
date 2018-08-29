@@ -17,7 +17,7 @@ class QuestionsSchema(Schema):
         validate=from_wtforms(
             [
                 Length(
-                    min=20,
+                    min=10,
                     max=100,
                     message="Question title should be between 20 to 50 characters"
                 ),

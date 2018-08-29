@@ -15,7 +15,6 @@ def run_query(query, inputs):
         db_instance.cur.execute(query, inputs)
         db_instance.conn.commit()
         db_instance.close()
-        return True
     except psycopg2.Error as e:
         return False
 

@@ -18,9 +18,6 @@ def truncate_tables():
             cursor.execute("TRUNCATE tbl_questions RESTART IDENTITY CASCADE;")
             db_instance.conn.close()
     except psycopg2.Error as e:
-        print('>>>>>>>>')
-        print(e)
-        print('<<<<<<<<<')
         raise SystemExit(
             "Failed to load schema.\n{0}".format(sys.exc_info())
         )

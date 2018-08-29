@@ -27,7 +27,7 @@ def get_all_answers(id):
     return answers
 
 def question_exists(question_id):
-    """Chek if the user email exists"""
+    """Check if the user email exists"""
     # SQL query
     query = u"SELECT * FROM tbl_questions WHERE question_id = %s;"
     inputs = question_id
@@ -37,3 +37,15 @@ def question_exists(question_id):
         if find_question['question_id'] == inputs:
             return True
     return False
+
+def get_specific_answer(id):
+    """Get specific"""
+    query = ("SELECT answered_by FROM tbl_answers WHERE answer_id = %s;")
+    inputs = id 
+    answer = get_query(query, inputs)
+    return answer
+
+def update_answer(answer, correct, user_id):
+    "Update answer details"
+    query = ("UPDATE tbl_answers SET answer_details = %s, is_correct= %s WHERE answered_by = %s;")
+    inputs = answer, correct, user_id

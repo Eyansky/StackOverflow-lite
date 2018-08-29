@@ -48,7 +48,7 @@ SWAG = Swagger(
         "uiversion": 2,
         "info": {
             "title": "Stack Overflow - LITE",
-            "version": "1.0",
+            "version": "2.0",
         },
         "consumes": [
             "application/x-www-form-urlencoded",

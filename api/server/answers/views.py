@@ -13,7 +13,7 @@ from flask_jwt_extended import (
 from flasgger.utils import swag_from
 
 from api.server.answers.schema import Answerschema
-from api.server.answers.models import ( create_answer, get_all_answers, question_exists )
+from api.server.answers.models import ( create_answer, get_all_answers, question_exists, get_specific_answer, update_answer )
 
 # Create a blueprint
 # __name__ . It is a built-in variable that returns the name of the module. 
@@ -60,7 +60,7 @@ class AnswersAPI(MethodView):
 
             #send to db
             create_answer( user_id, question_id, answer )
-
+           
             response_object = {
                 "status": 'success',
                 "msg": "Answer has been posted"
@@ -70,11 +70,11 @@ class AnswersAPI(MethodView):
             response = {
                 "error":"Question does not exist"
             }
-            return make_response(jsonify(response)), 404
+            return make_response(jsonify(response)), 422
 
     @swag_from('documentation/get_all_answers.yml', methods=['GET'])
     def get(self, id):
-        """Get all answers"""
+        """Get all answers for specific question"""
         # check if email exists
         if question_exists(id) == True:
             response_object = {
@@ -86,30 +86,68 @@ class AnswersAPI(MethodView):
             response = {
                 "error":"Question does not exist"
             }
-            return make_response(jsonify(response)), 404
+            return make_response(jsonify(response)), 422
 
-# class EditAnswersAPI(MethodView):
-#     """User Answers resource"""
-#     @jwt_required
-#     @swag_from('documentation/create_answer.yml', methods=['POST'])
-#     def put(self,id):  # pylint: disable=R0201
-#         """Send put method to answers endpoint"""
-#         if question_exists(id) == True:
-            
+class EditAnswersAPI(MethodView):
+    """User Answers resource"""
+    @jwt_required
+    @swag_from('documentation/modify_answer.yml', methods=['PUT'])
+    def put(self,id,answer_id):  # pylint: disable=R0201
+        """Send put method to answers endpoint"""
+        # getting the user id
+        current_user = get_jwt_identity()
+        user_id = current_user["user_id"]
         
-#         else:
-#             response = {
-#                 "error":"Question does not exist"
-#             }
-#             return make_response(jsonify(response)), 404
+        # checking if its related to the answer they want to post
+        dbuser = get_specific_answer(answer_id)
+
+        if dbuser[answered_by] == str(user_id):
+            if question_exists(id) == True:
+                # get the post data
+                post_data = request.get_json()
+
+                # load input to the marshmallow schema
+                try:
+                    ANSWER_SCHEMA.load(post_data)
+
+                # return error object case there is any
+                except ValidationError as err:
+                    response_object = {
+                        'status': 'fail',
+                        'msg': 'Validation errors.',
+                        'errors': err.messages
+                    }
+                    return make_response(jsonify(response_object)), 422
+                
+                #Updating the answer 
+                answer = post_data.get('answer')
+
+                update_answer(answer, user_id)
+            
+            else:
+                response = {
+                    "error":"Question does not exist"
+                }
+                return make_response(jsonify(response)), 422
+        else:
+            response = {"error":"Only the owner can edit this."}
+            return make_response(jsonify(response)), 401
 
 
 # define API resources
 ANSWERS_VIEW = AnswersAPI.as_view('answers_api')
+EDIT_ANSWER = EditAnswersAPI.as_view("edit_api")
 
 # add rules for questions endpoints
 ANSWERS_BLUEPRINT.add_url_rule(
     '/answers',
     view_func=ANSWERS_VIEW,
     methods=['POST','GET']
+)
+
+# add rules for questions endpoints
+ANSWERS_BLUEPRINT.add_url_rule(
+    '/answers/<int:answer_id>',
+    view_func=EDIT_ANSWER,
+    methods=['PUT']
 )
