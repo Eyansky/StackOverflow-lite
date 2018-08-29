@@ -27,10 +27,7 @@ class DevelopmentConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     TESTING = False
     DEBUG = True
     BCRYPT_LOG_ROUNDS = 4
-    DATABASE_NAME = os.getenv("PGDATABASE")
-    DATABASE_USER = os.getenv("PGUSER")
-    DATABASE_PASS = os.getenv("PGPASSWORD")
-    DATABASE_HOST = os.getenv("DATABASE_HOST")
+    DATABASEURI= os.getenv("DATABASEURI")
 
 
 class TestingConfig(BaseConfig):  # pylint: disable=too-few-public-methods
@@ -39,12 +36,12 @@ class TestingConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     TESTING = True
     BCRYPT_LOG_ROUNDS = 4
     PRESERVE_CONTEXT_ON_EXCEPTION = False
-    DATABASE_NAME = os.getenv("PGDATABASE") +"_test"
+    DATABASEURI= os.getenv("DATABASEURI")
 
 
 class ProductionConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     """Production configuration."""
     SECRET_KEY = 'TheSecretKey'
     DEBUG = False
-    DATABASE_NAME = os.getenv("PGDATABASE")
+    DATABASEURI= os.getenv("DATABASEURI")
 
