@@ -30,6 +30,8 @@ class DevelopmentConfig(BaseConfig):  # pylint: disable=too-few-public-methods
     DATABASE_NAME = os.getenv("PGDATABASE")
     DATABASE_USER = os.getenv("PGUSER")
     DATABASE_PASS = os.getenv("PGPASSWORD")
+    DATABASE_HOST = os.getenv("PGHOST")
+    DATABASE_PORT = os.getenv("PGPORT")
 
 
 class TestingConfig(BaseConfig):  # pylint: disable=too-few-public-methods
