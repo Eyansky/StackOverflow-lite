@@ -23,7 +23,6 @@ ANSWERS_BLUEPRINT = Blueprint(
 # Instanciate marshmallow shemas
 ANSWER_SCHEMA = Answerschema()
 
-
 class AnswersAPI(MethodView):
     """User Answers resource"""
     @jwt_required
@@ -120,6 +119,7 @@ class EditAnswersAPI(MethodView):
                     return make_response(jsonify(response_object)), 422
                 
                 #Updating the answer 
+        
                 answer = post_data.get('answer')
 
                 update_answer(answer, user_id)
