@@ -143,7 +143,7 @@ class EditAnswersAPI(MethodView):
 class CorrectAnswersAPI(MethodView):
     """User Answers resource"""
     @jwt_required
-    # @swag_from('documentation/modify_answer.yml', methods=['PUT'])
+    @swag_from('documentation/correct_answer.yml', methods=['PUT'])
     def put(self,id,answer_id):  # pylint: disable=R0201
         """Send put method to answers endpoint"""
         # getting the user id
