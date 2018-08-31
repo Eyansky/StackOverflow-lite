@@ -13,7 +13,7 @@ from flask_jwt_extended import (
 from flasgger.utils import swag_from
 
 from api.server.answers.schema import Answerschema
-from api.server.answers.models import ( create_answer, chukua_votes, get_voters, get_correctness, update_correct, get_all_answers, question_exists, get_specific_answer, update_answer )
+from api.server.answers.models import Answer
 
 # Create a blueprint
 # __name__ . It is a built-in variable that returns the name of the module. 
@@ -29,6 +29,8 @@ class AnswersAPI(MethodView):
     @swag_from('documentation/create_answer.yml', methods=['POST'])
     def post(self,id):  # pylint: disable=R0201
         """Send POST method to answers endpoint"""
+        # adding the answers class model 
+        modeljibu = Answer()
 
         # get the post data
         post_data = request.get_json()
@@ -47,7 +49,7 @@ class AnswersAPI(MethodView):
             return make_response(jsonify(response_object)), 422
         
         # check if the id exists
-        if question_exists(id) == True:
+        if modeljibu.question_exists(id) == True:
 
             # If no validation errors
             current_user = get_jwt_identity()
@@ -58,7 +60,7 @@ class AnswersAPI(MethodView):
             question_id = id 
 
             #send to db
-            create_answer( user_id, question_id, answer )
+            modeljibu.create_answer( user_id, question_id, answer )
            
             response_object = {
                 "status": 'success',
@@ -74,8 +76,11 @@ class AnswersAPI(MethodView):
     @swag_from('documentation/get_all_answers.yml', methods=['GET'])
     def get(self, id):
         """Get all answers for specific question"""
+        # adding the answers class model 
+        modeljibu = Answer()
+
         # check if email exists
-        if question_exists(id) == True:
+        if modeljibu.question_exists(id) == True:
             response_object = {
                 "status": 'success',
                 "questions": get_all_answers(id)
@@ -93,12 +98,15 @@ class EditAnswersAPI(MethodView):
     @swag_from('documentation/modify_answer.yml', methods=['PUT'])
     def put(self,id,answer_id):  # pylint: disable=R0201
         """Send put method to answers endpoint"""
+
+        # adding the answers class model 
+        modeljibu = Answer()
         # getting the user id
         current_user = get_jwt_identity()
         user_id = current_user["user_id"]
         
         # checking if user is related to the answer they want to post
-        dbuser = get_specific_answer(answer_id)
+        dbuser = modeljibu.get_specific_answer(answer_id)
 
         for key in dbuser:
             if str(key["answered_by"]) == str(user_id):
@@ -123,7 +131,7 @@ class EditAnswersAPI(MethodView):
             
                     answer = post_data.get('answer')
 
-                    update_answer(answer, answer_id)
+                    modeljibu.update_answer(answer, answer_id)
 
                     response = {
                         "message":"Question has been updated"
@@ -146,27 +154,31 @@ class CorrectAnswersAPI(MethodView):
     @swag_from('documentation/correct_answer.yml', methods=['PUT'])
     def put(self,id,answer_id):  # pylint: disable=R0201
         """Send put method to answers endpoint"""
+
+        # adding the answers class model 
+        modeljibu = Answer()
+
         # getting the user id
         current_user = get_jwt_identity()
         user_id = current_user["user_id"]
         
         # checking if user is related to the answer they want to edit
-        dbuser = get_specific_answer(answer_id)
+        dbuser = modeljibu.get_specific_answer(answer_id)
 
         for key in dbuser:
             if str(key["answered_by"]) == str(user_id):
 
                 # Checking if the state is YES or NO
-                state = get_correctness(answer_id)
+                state = modeljibu.get_correctness(answer_id)
 
                 if question_exists(id) == True:
                     for key in state:
                         if str(key["is_correct"]) == "No":
                             correct= "Yes"
-                            update_correct(correct, answer_id)
+                            modeljibu.update_correct(correct, answer_id)
                         else:
                             correct= "No"
-                            update_correct(correct, answer_id)
+                            modeljibu.update_correct(correct, answer_id)
 
                     response = {
                         "message":"Question has been marked as correct"

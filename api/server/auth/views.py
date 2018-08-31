@@ -10,8 +10,7 @@ from marshmallow import ValidationError
 from flask_jwt_extended import (create_access_token)
 from flasgger.utils import swag_from
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from api.server.auth.models import (
-    signup_user, login_user, email_exists, get_user_info)
+from api.server.auth.models import Auth 
 from api.server.auth.schema import UserSchema, LoginSchema
 
 # Create a blueprint
@@ -27,6 +26,9 @@ class SignupAPI(MethodView):
     @swag_from('documentation/register.yml', methods=['POST'])
     def post(self):  # pylint: disable=R0201
         """POST method"""
+
+        # importing the class 
+        auth = Auth()
         # get the post data
         post_data = request.get_json()
 
@@ -55,14 +57,14 @@ class SignupAPI(MethodView):
         input_email = post_data.get('email')
         input_password = post_data.get('password')
 
-        if email_exists(input_email):
+        if auth.email_exists(input_email):
             response_object = {
                 "status": "fail",
                 "msg": "Sorry! Email '{}' already exists.".format(
                     input_email)
             }
             return make_response(jsonify(response_object)), 422
-        signup_user(input_first_name, input_last_name,
+        auth.signup_user(input_first_name, input_last_name,
                     input_email, input_password)
         # return response
         response_object = {
@@ -84,6 +86,9 @@ class LoginAPI(MethodView):
     @swag_from('documentation/login.yml', methods=['POST'])
     def post(self):  # pylint: disable=R0201
         """post method"""
+
+        # importing the class 
+        auth = Auth()
         # get the post data
         post_data = request.get_json()
 
@@ -104,7 +109,7 @@ class LoginAPI(MethodView):
         input_email = post_data.get('email')
         input_password = post_data.get('password')
         # check if email exists
-        if not email_exists(input_email):
+        if not auth.email_exists(input_email):
             response_object = {
                 'status': 'fail',
                 'msg': "Sorry, email '{}' does not exist.".format(
@@ -114,7 +119,7 @@ class LoginAPI(MethodView):
 
         # If no validation errors
         # If login is successful
-        user_info = login_user(input_email, input_password)
+        user_info = auth.login_user(input_email, input_password)
         if not user_info:
             # Failed login - password
             response_object = {
@@ -143,8 +148,12 @@ class UserAPI(MethodView):
     @swag_from('documentation/user.yml', methods=['GET'])
     def get(self):  # pylint: disable=R0201
         """Get all user details"""
+
+        # importing the class 
+        auth = Auth()
+
         user_id = get_jwt_identity()
-        user_info = get_user_info(user_id["user_id"])
+        user_info = auth.get_user_info(user_id["user_id"])
         response_object = {
             "status": 'success',
             "result": user_info

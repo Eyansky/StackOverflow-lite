@@ -13,8 +13,7 @@ from flask_jwt_extended import (
 from flasgger.utils import swag_from
 
 from api.server.questions.schema import QuestionsSchema
-from api.server.questions.models import (
-    create_question, get_all_questions, get_single_question, delete_single_question)
+from api.server.questions.models import Questions
 
 # Create a blueprint
 # __name__ . It is a built-in variable that returns the name of the module. 
@@ -31,6 +30,9 @@ class QuestionsAPI(MethodView):
     @swag_from('documentation/create_questions.yml', methods=['POST'])
     def post(self):  # pylint: disable=R0201
         """Send POST method to questions endpoint"""
+
+        # importing the questions model class
+        qmodel = Questions()
 
         # get the post data
         post_data = request.get_json()
@@ -56,7 +58,7 @@ class QuestionsAPI(MethodView):
         input_details = post_data.get('details')
         user_id = current_user["user_id"]
 
-        create_question(input_title, input_details, user_id)
+        qmodel.create_question(input_title, input_details, user_id)
 
         response_object = {
             "status": 'success',
@@ -67,10 +69,12 @@ class QuestionsAPI(MethodView):
     @swag_from('documentation/get_all_questions.yml', methods=['GET'])
     def get(self):
         """Get all questions"""
+        # importing the questions model class
+        qmodel = Questions()
 
         response_object = {
             "status": 'success',
-            "questions": get_all_questions()
+            "questions": qmodel.get_all_questions()
         }
         return make_response(jsonify(response_object)), 200
 
@@ -80,11 +84,14 @@ class SingleQuestionsAPI(MethodView):
     def get(self,id):
         """Get a single question"""
 
+        # importing the questions model class
+        qmodel = Questions()
+
         try:
             if int(id):
                 response_object = {
                     "status": 'success',
-                    "question": get_single_question(id)
+                    "question": qmodel.get_single_question(id)
                 }
                 return make_response(jsonify(response_object)), 200
           
@@ -96,10 +103,12 @@ class SingleQuestionsAPI(MethodView):
     def delete(self,id):
         """Delete a single question"""
 
-    
+        # importing the questions model class
+        qmodel = Questions()
+
         try:
             if int(id):
-                delete_single_question(id)
+                qmodel.delete_single_question(str(id))
                 response_object = {
                     "status": 'success'
                 }
