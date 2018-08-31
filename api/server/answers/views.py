@@ -13,7 +13,7 @@ from flask_jwt_extended import (
 from flasgger.utils import swag_from
 
 from api.server.answers.schema import Answerschema
-from api.server.answers.models import ( create_answer, get_all_answers, question_exists, get_specific_answer, update_answer )
+from api.server.answers.models import ( create_answer, chukua_votes, get_voters, get_correctness, update_correct, get_all_answers, question_exists, get_specific_answer, update_answer )
 
 # Create a blueprint
 # __name__ . It is a built-in variable that returns the name of the module. 
@@ -97,57 +97,158 @@ class EditAnswersAPI(MethodView):
         current_user = get_jwt_identity()
         user_id = current_user["user_id"]
         
-        # checking if its related to the answer they want to post
+        # checking if user is related to the answer they want to post
         dbuser = get_specific_answer(answer_id)
 
-        if dbuser[answered_by] == str(user_id):
-            if question_exists(id) == True:
-                # get the post data
-                post_data = request.get_json()
+        for key in dbuser:
+            if str(key["answered_by"]) == str(user_id):
+                if question_exists(id) == True:
+                    # get the post data
+                    post_data = request.get_json()
 
-                # load input to the marshmallow schema
-                try:
-                    ANSWER_SCHEMA.load(post_data)
+                    # load input to the marshmallow schema
+                    try:
+                        ANSWER_SCHEMA.load(post_data)
 
-                # return error object case there is any
-                except ValidationError as err:
-                    response_object = {
-                        'status': 'fail',
-                        'msg': 'Validation errors.',
-                        'errors': err.messages
-                    }
-                    return make_response(jsonify(response_object)), 422
-                
-                #Updating the answer 
-        
-                answer = post_data.get('answer')
-
-                update_answer(answer, user_id)
+                    # return error object case there is any
+                    except ValidationError as err:
+                        response_object = {
+                            'status': 'fail',
+                            'msg': 'Validation errors.',
+                            'errors': err.messages
+                        }
+                        return make_response(jsonify(response_object)), 422
+                    
+                    #Updating the answer 
             
-            else:
-                response = {
-                    "error":"Question does not exist"
-                }
-                return make_response(jsonify(response)), 422
-        else:
-            response = {"error":"Only the owner can edit this."}
-            return make_response(jsonify(response)), 401
+                    answer = post_data.get('answer')
 
+                    update_answer(answer, answer_id)
+
+                    response = {
+                        "message":"Question has been updated"
+                    }
+                    return make_response(jsonify(response)), 201
+                
+                else:
+                    response = {
+                        "error":"Question does not exist"
+                    }
+                    return make_response(jsonify(response)), 422
+            else:
+                response = {"error":"Only the owner can edit this."}
+                return make_response(jsonify(response)), 401
+
+
+class CorrectAnswersAPI(MethodView):
+    """User Answers resource"""
+    @jwt_required
+    # @swag_from('documentation/modify_answer.yml', methods=['PUT'])
+    def put(self,id,answer_id):  # pylint: disable=R0201
+        """Send put method to answers endpoint"""
+        # getting the user id
+        current_user = get_jwt_identity()
+        user_id = current_user["user_id"]
+        
+        # checking if user is related to the answer they want to edit
+        dbuser = get_specific_answer(answer_id)
+
+        for key in dbuser:
+            if str(key["answered_by"]) == str(user_id):
+
+                # Checking if the state is YES or NO
+                state = get_correctness(answer_id)
+
+                if question_exists(id) == True:
+                    for key in state:
+                        if str(key["is_correct"]) == "No":
+                            correct= "Yes"
+                            update_correct(correct, answer_id)
+                        else:
+                            correct= "No"
+                            update_correct(correct, answer_id)
+
+                    response = {
+                        "message":"Question has been marked as correct"
+                    }
+                    return make_response(jsonify(response)), 201
+            
+                else:
+                    response = {
+                        "error":"Question does not exist"
+                    }
+                    return make_response(jsonify(response)), 422
+            else:
+                response = {"error":"Only the owner can edit this."}
+                return make_response(jsonify(response)), 401
+
+# class upvoteAPI(MethodView):
+#     """User Answers resource"""
+#     @jwt_required
+#     @swag_from('documentation/modify_answer.yml', methods=['PUT'])
+#     def put(self,id,answer_id):  # pylint: disable=R0201
+#         """Send put method to answers endpoint"""
+#         # getting the user id
+#         current_user = get_jwt_identity()
+#         user_id = current_user["user_id"]
+#         # check if user voted
+#         mtu = get_voters()
+#         votes = chukua_votes(answer_id) 
+        
+#         if mtu:
+#             for find_voters in mtu:
+#                 if find_voters['voter_user_id'] == user_id:
+#                     print("You already voted")
+#                     response = {"details":"umepiga kura"}
+#                     return make_response(jsonify(response)), 401
+
+#                 else:
+#                     if votes:
+#                         for kura in votes:
+#                             iebc = kura["upvote"]
+#                             print(iebc)
+#                             response = {"details":iebc}
+#                             return make_response(jsonify(response)), 401
+                    
+
+            
+
+#         response = {"details":"Keep calm!!"}
+#         return make_response(jsonify(response)), 401
+
+
+        
 
 # define API resources
 ANSWERS_VIEW = AnswersAPI.as_view('answers_api')
 EDIT_ANSWER = EditAnswersAPI.as_view("edit_api")
+CORRECT_ANSWER = CorrectAnswersAPI.as_view("correct_api")
+# UPVOTE_ANSWER = upvoteAPI.as_view("upvote_api")
 
-# add rules for questions endpoints
+# add rules for endpoints
 ANSWERS_BLUEPRINT.add_url_rule(
     '/answers',
     view_func=ANSWERS_VIEW,
     methods=['POST','GET']
 )
 
-# add rules for questions endpoints
+# add rules for endpoints
 ANSWERS_BLUEPRINT.add_url_rule(
     '/answers/<int:answer_id>',
     view_func=EDIT_ANSWER,
     methods=['PUT']
 )
+
+# add rules for endpoints
+ANSWERS_BLUEPRINT.add_url_rule(
+    '/answers/<int:answer_id>/correct',
+    view_func=CORRECT_ANSWER,
+    methods=['PUT']
+)
+
+# add rules for endpoints
+# ANSWERS_BLUEPRINT.add_url_rule(
+#     '/answers/<int:answer_id>/upvote',
+#     view_func=UPVOTE_ANSWER,
+#     methods=['PUT']
+# )

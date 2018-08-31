@@ -96,6 +96,7 @@ class SingleQuestionsAPI(MethodView):
     def delete(self,id):
         """Delete a single question"""
 
+    
         try:
             if int(id):
                 delete_single_question(id)

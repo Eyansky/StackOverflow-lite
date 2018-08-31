@@ -45,7 +45,52 @@ def get_specific_answer(id):
     answer = get_query(query, inputs)
     return answer
 
-def update_answer(answer, correct, user_id):
+def update_answer(answer, answer_id):
     "Update answer details"
-    query = ("UPDATE tbl_answers SET answer_details = %s, is_correct= %s WHERE answered_by = %s;")
-    inputs = answer, correct, user_id
+    query = ("UPDATE tbl_answers SET answer_details = %s WHERE answer_id = %s;")
+    inputs = answer, answer_id
+    run_query(query,inputs)
+    return True
+
+def update_correct(correct, answer_id):
+    "Update answer correctness"
+    query = ("UPDATE tbl_answers SET is_correct = %s WHERE answer_id = %s;")
+    inputs = correct, answer_id
+    x = run_query(query,inputs)
+    return x
+
+def get_correctness(id):
+    """Get state of correctness"""
+    query = ("SELECT is_correct FROM tbl_answers WHERE answer_id = %s;")
+    inputs = id 
+    correct = get_query(query, inputs)
+    return correct
+
+def get_voters():
+    """Get who voted"""
+    query = ("SELECT voter_user_id FROM tbl_voters;")
+    correct = get_just_query(query)
+    return correct
+
+def add_vote(upvote):
+    """Add votes """
+    try:
+        query = ("INSERT INTO tbl_answers ( upvote ) VALUES (%s) ;")
+        inputs = upvote
+        return run_query(query, inputs)
+    except psycopg2.Error as e:
+        print(e)
+
+def delete_vote(id):
+    """Delete an upvote"""
+    query = ("DELETE FROM tbl_answers WHERE question_id = %s;")
+    inputs = id
+    user_requests = run_query(query, inputs)
+    return user_requests
+
+def chukua_votes(answer_id):
+    """Get the votes"""
+    query = ("SELECT upvote FROM tbl_answers WHERE answer_id = %s;")
+    inputs = answer_id
+    correct = get_query(query, inputs)
+    return correct 

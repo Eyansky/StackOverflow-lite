@@ -50,3 +50,9 @@ CREATE TABLE tbl_replies
   FOREIGN KEY(r_question_id) REFERENCES tbl_questions(question_id),
   FOREIGN KEY(r_user_id) REFERENCES tbl_users(user_id)
 );
+CREATE TABLE tbl_voters
+(
+	voter_id SERIAL PRIMARY KEY,
+	voter_user_id INTEGER NOT NULL,
+  voter_answer_id INTEGER NOT NULL
+);
